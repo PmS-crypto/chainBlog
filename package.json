@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^1.7.0"
+  },
+  "name": "solidity-blog-youtube",
+  "description": "![Dev.to Blog App Clone](https://i.ibb.co/JR0Wg6q/Clean-Shot-2022-09-21-at-17-30-12.jpg)",
+  "version": "1.0.0",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
