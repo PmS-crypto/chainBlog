@@ -40,9 +40,9 @@ export const AppProvider = ({ children }) => {
 
   const getUploadedPostAddresses = async (contract = contractInstance) => {
     try {
-      const addresses = await contract.methods.getMyPosts().call()
+      const addresses = await contract.methods.getUploadedPosts().call()
 
-      post(addresses)
+      setBlogAddresses(addresses)
     } catch (error) {
       console.error(error)
     }

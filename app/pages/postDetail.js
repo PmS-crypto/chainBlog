@@ -43,7 +43,7 @@ export default function FirstPost() {
               <span className='button-count'>
                 {Math.floor(Math.random() * 200)}
               </span> */}
-              {/* <Link to="/postDetail">post detail</Link> */}
+                {/* <Link to="/postDetail">post detail</Link> */}
               <button className='modal-submit link-text'>
                 <Link href="/livepeer">Play Video</Link>
               </button>
