@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import{ Web3Storage } from 'web3.storage'
+import { Web3Storage } from 'web3.storage'
+import Link from 'next/link';
 
 export default function Upload(){
     const[files,setFile] = useState([])
@@ -17,27 +18,40 @@ export default function Upload(){
         const generatedurl = `https://dweb.link/ipfs/${getcid}`
         setGenertedurl(generatedurl)
         console.log(generatedurl)
-        
-    }
-
-    const handleFetchImgClick = async(e) => {
-        e.preventDefault()
-        const fetchimgUrl = `https://${cid}.ipfs.dweb.link/${filename}`
+        const fetchimgUrl = `https://${getcid}.ipfs.dweb.link/${filename}`
         setURL(fetchimgUrl)
     }
-    return(
-        <form onSubmit={handlesubmit}>
-          <input type='file' id='filepicker'  name='fileList' onChange={e => 
-                    {
-                        setFile(e.target.files)
-                        setfilename(e.target.files[0].name)
-                        
-                    }
-                    } multiple required />
-            <button>Uploadimage</button>
-        
-            <button onClick={handleFetchImgClick}>Fetch Image</button>
+
+    // const handleFetchImgClick = async(e) => {
+    //     e.preventDefault()
+    //     const fetchimgUrl = `https://${cid}.ipfs.dweb.link/${filename}`
+    //     setURL(fetchimgUrl)
+    // }
+
+    // if (!{cid}){
+    //     handleFetchImgClick()
+    // }
+    return (
+        <div>
+            <form onSubmit={handlesubmit}>
+            <input type='file' id='filepicker'  name='fileList' onChange={e => 
+                        {
+                            setFile(e.target.files)
+                            setfilename(e.target.files[0].name)
+                            
+                        }
+                        } multiple required />
+                <button>Uploadimage</button>
+            
+                {/* <button onClick={handleFetchImgClick}>Fetch Image</button> */}            
+                
+            </form>
             <img src={url} alt="txt" />
-        </form>
+            <button className='modal-submit link-text'>
+                <Link href="/postDetail">Back</Link>
+            </button>
+        </div>
+        
+
     )
 }

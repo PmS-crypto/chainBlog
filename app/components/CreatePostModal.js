@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useAppContext } from '../context/context'
+import Link from 'next/link'
 
 const CreatePost = () => {
   const [title, setTitle] = useState('')
@@ -69,6 +70,12 @@ const CreatePost = () => {
             setError('')
           }}
         />
+        <button className='modal-submit link-text'>
+        <Link href="/uploadImage">Upload Image</Link>
+        </button>
+        <button className='modal-submit link-text'>
+          <Link href="/uploadVideos">Upload Video</Link>
+        </button>
         <button className='modal-submit' onClick={handleSubmit}>
           Submit
         </button>
