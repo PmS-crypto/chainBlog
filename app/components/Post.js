@@ -3,6 +3,9 @@ import { useState } from 'react'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { FaRegComment } from 'react-icons/fa'
 import { useAppContext } from '../context/context'
+import { Posts } from '../data/Post.seed' 
+import Link from 'next/link'
+// import { Link } from 'react-router-dom';
 
 const Post = ({
   index,
@@ -14,19 +17,19 @@ const Post = ({
   likes,
   likers,
 }) => {
-  const { likePost, currentWalletAddress } = useAppContext()
-  const [liked, setLiked] = useState(likers.includes(currentWalletAddress))
+  // const { likePost, currentWalletAddress } = useAppContext()
+  // const [liked, setLiked] = useState(likers.includes(currentWalletAddress))
 
   const postDate = new Date(parseInt(timestamp)).toLocaleString('en-US', {
     month: 'short',
     day: 'numeric',
   })
 
-  const handleLikeClick = async () => {
-    await likePost(index)
+  // const handleLikeClick = async () => {
+  //   await likePost(index)
 
-    setLiked(true)
-  }
+  //   setLiked(true)
+  // }
 
   return (
     <div className='card d-flex'>
@@ -50,7 +53,7 @@ const Post = ({
 
         <div className='card-content mt-15'>
           <div className='postHeader'>{title}</div>
-          <div className='description'>{postText}</div>
+          <div className='description'>test description</div>
         </div>
         <div className='tags mt-9'>
           <div className='ml-5 inline popular-tag'>
@@ -59,7 +62,7 @@ const Post = ({
         </div>
         <div className='card-footer'>
           <div className='card-footer__button-group'>
-            <div
+            {/* <div
               className='button-wrap--medium reaction-icon'
               onClick={handleLikeClick}
             >
@@ -69,12 +72,16 @@ const Post = ({
                 <AiOutlineHeart />
               )}
               <span className='button-count'>{likes}</span>
-            </div>
-            <div className='button-wrap--medium reaction-icon'>
-              <FaRegComment />
+            </div> */}
+            <div>
+              {/* <FaRegComment />
               <span className='button-count'>
                 {Math.floor(Math.random() * 200)}
-              </span>
+              </span> */}
+              {/* <Link to="/postDetail">post detail</Link> */}
+              <button className='modal-submit link-text'>
+                <Link href="/postDetail">Read more</Link>
+              </button>
             </div>
           </div>
         </div>

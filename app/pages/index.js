@@ -8,6 +8,7 @@ import Navbar from '../components/Navbar'
 import Survey from '../components/Survey'
 import SideBar from '../components/Sidebar'
 import { Listing } from '../data/Listing.seed'
+import { Posts } from '../data/Post.seed'
 import ConnectContainer from '../components/ConnectContainer'
 import { SurveySeed } from '../data/Survey.seed'
 import Modal from 'react-modal'
@@ -18,6 +19,7 @@ import { infuraProvider } from 'wagmi/providers/infura'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 import CreatePostModal from '../components/CreatePostModal'
 import { useAppContext } from '../context/context'
+// import ReactDOM from 'react-dom';
 
 Modal.setAppElement('#__next')
 
@@ -111,7 +113,7 @@ const Home = () => {
               </nav>
             </aside>
             <main className='main-content'>
-              {posts.map((item, index) => {
+              {Posts.map((item, index) => {
                 return <Post {...item} key={index} />
               })}
             </main>
