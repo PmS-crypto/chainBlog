@@ -12,7 +12,7 @@ This is a Dev.to-like Blog application built with Next.js and Solidity.
 - Infura, as RPC Provider
 
 ---
-#Commands to run the dapp
+### Commands to run the dapp
 
 cd solidity-blog
 cd app
