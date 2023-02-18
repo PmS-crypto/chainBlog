@@ -4,7 +4,7 @@
 import postAbi from './Blog.json'
 
 // const contractAddress = '0x5C61734441fe9F06Ffc7BE970D4a766B79bFcF85'
-const contractAddress = '0x5276ff444E6729D58b824714e95C68961B50eF5F'
+const contractAddress = '0x8605e851504D7a1130c9C3D16a15449E19568E3B'
 
 // const blogInstance = (web3Instance, address) => {
 //   return new web3Instance.eth.Contract(postAbi.abi, address)
@@ -15,7 +15,7 @@ const contractAddress = '0x5276ff444E6729D58b824714e95C68961B50eF5F'
 // }
 
 const blogInstance = (web3Instance) => {
-    return new web3Instance.eth.Contract(postAbi.abi, contractAddress)
-  }
+  return new web3Instance.eth.Contract(postAbi.abi, contractAddress)
+}
 
 export { blogInstance }

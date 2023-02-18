@@ -25,18 +25,31 @@ export const AppProvider = ({ children }) => {
       setWeb3Instance(web3)
 
       const accounts = await web3.eth.getAccounts()
+      console.log(accounts)
       setCurrentWalletAddress(accounts[0])
 
-      const contract = await factoryInstance(web3)
+      const contract = await blogInstance(web3)
       setContractInstance(contract)
 
-      getUploadedPostAddresses(contract)
+      // getUploadedPostAddresses(contract);
     })()
   }, [ethereum])
 
   useEffect(() => {
-    getPostContent()
+    // getPostContent()
+    greet()
   }, [blogAddresses])
+
+  const greet = async (contract = contractInstance) => {
+    try {
+      const addresses = await contract.methods.greet().call()
+
+      // post(addresses)
+      console.log(addresses)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const getUploadedPostAddresses = async (contract = contractInstance) => {
     try {
@@ -50,11 +63,11 @@ export const AppProvider = ({ children }) => {
 
   const getPostContent = async () => {
     const fetchedPosts = await Promise.all(
-      blogAddresses.map(async address => {
+      blogAddresses.map(async (address) => {
         const post = blogInstance(web3Instance, address)
 
         return post.methods.getPostDetails().call()
-      }),
+      })
     )
 
     const formattedPosts = fetchedPosts.map((post, index) => ({
@@ -87,7 +100,7 @@ export const AppProvider = ({ children }) => {
     }
   }
 
-  const likePost = async postIndex => {
+  const likePost = async (postIndex) => {
     if (!currentWalletAddress) return
 
     try {
@@ -102,9 +115,7 @@ export const AppProvider = ({ children }) => {
   }
 
   return (
-    <appContext.Provider
-      value={{ createBlog, posts, likePost, currentWalletAddress }}
-    >
+    <appContext.Provider value={{ posts, currentWalletAddress }}>
       {children}
     </appContext.Provider>
   )

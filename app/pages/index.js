@@ -16,24 +16,24 @@ import '@rainbow-me/rainbowkit/styles.css'
 import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import { chain, configureChains, createClient, WagmiConfig } from 'wagmi'
 import { infuraProvider } from 'wagmi/providers/infura'
+import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 import CreatePostModal from '../components/CreatePostModal'
 import { useAppContext } from '../context/context'
+import { mainnet, optimism, polygonMumbai } from 'wagmi/chains'
+import { publicProvider } from 'wagmi/providers/public'
+
 // import ReactDOM from 'react-dom';
 
 Modal.setAppElement('#__next')
 
+// const { chains, provider } = configureChains([polygonMumbai], [alchemyProvider({ apiKey: process.env.PRIVATE_KEY, priority: 1 })]);
 const { chains, provider } = configureChains(
-  [chain.goerli, chain.localhost],
+  [chain.polygonMumbai],
   [
-    infuraProvider({ apiKey: process.env.INFURA_API_KEY, priority: 1 }),
-    jsonRpcProvider({
-      priority: 2,
-      rpc: chain => ({
-        http: `HTTP://127.0.0.1:7545`,
-      }),
-    }),
-  ],
+    alchemyProvider({ apiKey: 'VRUMs3WJcJAMuWi9nCZ8rIpkgR9BYhy_' }),
+    publicProvider(),
+  ]
 )
 
 const { connectors } = getDefaultWallets({
@@ -106,7 +106,7 @@ const Home = () => {
                 <div className='main-nav-section'>
                   <ConnectContainer />
                   <SideBar />
-                  {SurveySeed.map(item => {
+                  {SurveySeed.map((item) => {
                     return <Survey key={item.src} {...item} />
                   })}
                 </div>
@@ -133,7 +133,7 @@ const Home = () => {
                       )}
                     </header>
                     <section className='trends-content'>
-                      {item?.data?.map(data => {
+                      {item?.data?.map((data) => {
                         return <ListItem {...data} key={data.title} />
                       })}
                     </section>
