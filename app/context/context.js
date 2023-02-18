@@ -2,6 +2,32 @@ import { createContext, useState, useEffect, useContext } from 'react'
 import { blogInstance } from '../utils/instances'
 import Web3 from 'web3'
 
+import { createClient } from 'urql'
+
+const APIURL =
+  'https://api.studio.thegraph.com/query/42411/blogging-dapp/v0.0.5'
+
+const tokensQuery = `
+  query {
+    postAddeds(first: 5) {
+      id
+      postId
+      author
+      imageUrl
+      imageName
+      assetId
+      playbackId
+      title
+      text
+      blockTimestamp
+    }
+  }
+`
+
+const client = createClient({
+  url: APIURL,
+})
+
 export const appContext = createContext()
 
 let ethereum = null
@@ -36,7 +62,7 @@ export const AppProvider = ({ children }) => {
   }, [ethereum])
 
   useEffect(() => {
-    // getPostContent()
+    getPostContent()
     greet()
   }, [blogAddresses])
 
@@ -62,26 +88,12 @@ export const AppProvider = ({ children }) => {
   }
 
   const getPostContent = async () => {
-    const fetchedPosts = await Promise.all(
-      blogAddresses.map(async (address) => {
-        const post = blogInstance(web3Instance, address)
+    const fetchedPosts = await client.query(tokensQuery).toPromise()
+    console.log('Fetching posts')
+    console.log(fetchedPosts)
+    console.log('Fetched posts')
 
-        return post.methods.getPostDetails().call()
-      })
-    )
-
-    const formattedPosts = fetchedPosts.map((post, index) => ({
-      index: index,
-      author: post[0],
-      title: post[1],
-      tag: post[2],
-      timestamp: post[3],
-      postText: post[4],
-      likes: post[5],
-      likers: post[6],
-    }))
-
-    setPosts(formattedPosts.reverse())
+    setPosts(fetchedPosts)
   }
 
   const createBlog = async (title, hash, text) => {
@@ -115,7 +127,13 @@ export const AppProvider = ({ children }) => {
   }
 
   return (
-    <appContext.Provider value={{ posts, currentWalletAddress }}>
+    <appContext.Provider
+      value={{
+        greet,
+        posts,
+        currentWalletAddress,
+      }}
+    >
       {children}
     </appContext.Provider>
   )

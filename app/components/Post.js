@@ -3,19 +3,21 @@ import { useState } from 'react'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { FaRegComment } from 'react-icons/fa'
 import { useAppContext } from '../context/context'
-import { Posts } from '../data/Post.seed' 
+import { Posts } from '../data/Post.seed'
 import Link from 'next/link'
 // import { Link } from 'react-router-dom';
 
 const Post = ({
-  index,
+  postId,
   author,
+  text,
+  tags,
+  value,
+  imageUrl,
+  imageName,
+  assetId,
+  playbackId,
   title,
-  tag,
-  timestamp,
-  postText,
-  likes,
-  likers,
 }) => {
   // const { likePost, currentWalletAddress } = useAppContext()
   // const [liked, setLiked] = useState(likers.includes(currentWalletAddress))
@@ -80,7 +82,7 @@ const Post = ({
               </span> */}
               {/* <Link to="/postDetail">post detail</Link> */}
               <button className='modal-submit link-text'>
-                <Link href="/postDetail">Read more</Link>
+                <Link href='/postDetail'>Read more</Link>
               </button>
             </div>
           </div>
