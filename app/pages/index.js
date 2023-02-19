@@ -25,33 +25,7 @@ import { publicProvider } from 'wagmi/providers/public'
 
 // import ReactDOM from 'react-dom';
 
-import { createClient } from 'urql'
 
-const APIURL =
-  'https://api.studio.thegraph.com/query/42411/blogging-dapp/v0.0.5'
-
-const tokensQuery = `
-  query {
-    postAddeds(first: 5) {
-      id
-      postId
-      author
-      imageUrl
-      imageName
-      assetId
-      playbackId
-      title
-      text
-      blockTimestamp
-    }
-  }
-`
-
-const client = createClient({
-  url: APIURL,
-})
-
-const postsData = await client.query(tokensQuery).toPromise()
 
 Modal.setAppElement('#__next')
 

@@ -22,10 +22,10 @@ const Post = ({
   // const { likePost, currentWalletAddress } = useAppContext()
   // const [liked, setLiked] = useState(likers.includes(currentWalletAddress))
 
-  const postDate = new Date(parseInt(timestamp)).toLocaleString('en-US', {
-    month: 'short',
-    day: 'numeric',
-  })
+  // const postDate = new Date(parseInt(timestamp)).toLocaleString('en-US', {
+  //   month: 'short',
+  //   day: 'numeric',
+  // })
 
   // const handleLikeClick = async () => {
   //   await likePost(index)
@@ -49,7 +49,7 @@ const Post = ({
         </div>
         <div className='card-intro mt-2 '>
           <span className='text-weight-medium grey-tab pr-5 text-9'>
-            {postDate}
+            {/* {postDate} */}
           </span>
         </div>
 
