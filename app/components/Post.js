@@ -1,12 +1,47 @@
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { FaRegComment } from 'react-icons/fa'
 import { useAppContext } from '../context/context'
 import { Posts } from '../data/Post.seed'
+import { createClient } from 'urql';
 import Link from 'next/link'
-import App  from '../pages/urqlClient'
 // import { Link } from 'react-router-dom';
+
+const APIURL = "https://api.studio.thegraph.com/query/42411/blogging-dapp/v0.0.5"
+
+const query = `
+query {
+  postAddeds(first: 5) {
+    id
+    postId
+    author
+    imageUrl
+    imageName
+    assetId
+    playbackId
+    title
+    text
+    blockTimestamp
+  }
+}
+`
+const querypostData = `
+query {
+  postAddeds(where: {postId: ID}) {
+    imageUrl
+    imageName
+    assetId
+    playbackId
+    title
+    text
+    blockTimestamp
+  }
+}
+`
+const client = createClient({
+  url : APIURL
+})
 
 const Post = ({
   // postId,
@@ -34,62 +69,65 @@ const Post = ({
   //   setLiked(true)
   // }
 
+  const [postAddeds, setpostAddeds] = useState([])
+  useEffect(() => {
+    fetchData()
+  }, [])
+  
+  async function fetchData() {
+    const response = await client.query(query).toPromise()
+    console.log('response : ', response)
+    //setaddedVoters(response.data.addedVoters)
+    setpostAddeds(response.data.postAddeds)
+    console.log("Author name", response.data.postAddeds[0]["author"])
+    console.log("Posts: ", postAddeds)
+  }
+  // console.log("POSTID")
+  // postAddeds.map((post, index) => { console.log(post.postId) })
+  
+  // async function fetchpostId() {
+  //   const response = await client.query(querypostData).toPromise()
+  //     return response
+  //   }
   return (
-    <div className='card d-flex'>
-      <div className='avatar-wrap relative'>
-        <Image
-          className='avatar--small'
-          // src={`https://avatars.dicebear.com/api/identicon/${author}.svg`}
-          alt='Avatar'
-          layout='fill'
-        />
-      </div>
-      <div className='card-body'>
-        <div className='card-intro'>
-          {/* <span className='text-weight-500 grey-tab pr-5'>{author}</span> */}
-        </div>
-        <div className='card-intro mt-2 '>
-          <span className='text-weight-medium grey-tab pr-5 text-9'>
-            {/* {postDate} */}
-          </span>
-        </div>
-
-        <div className='card-content mt-15'>
-          <div className='postHeader'>title</div>
-          <div className='description'>test description</div>
-        </div>
-        <div className='tags mt-9'>
-          <div className='ml-5 inline popular-tag'>
-            #<span className='hash-tag'>{/*tag*/}</span>
-          </div>
-        </div>
-        <div className='card-footer'>
-          <div className='card-footer__button-group'>
-            {/* <div
-              className='button-wrap--medium reaction-icon'
-              onClick={handleLikeClick}
-            >
-              {liked ? (
-                <AiFillHeart className='red-heart' />
-              ) : (
-                <AiOutlineHeart />
-              )}
-              <span className='button-count'>{likes}</span>
-            </div> */}
-            <div>
-              {/* <FaRegComment />
-              <span className='button-count'>
-                {Math.floor(Math.random() * 200)}
-              </span> */}
-              {/* <Link to="/postDetail">post detail</Link> */}
-              <button className='modal-submit link-text'>
-                <Link href='/postDetail'>Read more</Link>
+    <>
+      {
+      postAddeds.map((posts, index) => (
+        <div key={posts.postId}>
+          <div className='card d-flex'>
+            <div className='card-body'>
+              <div className='card-intro'>
+                { <span className='text-weight-500 grey-tab pr-5'>{posts.author}</span> }
+              </div>
+              <div className='card-content mt-15'>
+                <div className='postHeader'>{posts.title}</div>
+                <div className='description'>{posts.text}</div>
+              </div>
+              <button className='modal-submit link-text' /*onClick={fetchpostId({posts.postId})}*/>
+                <Link href={{ pathname: '/postDetail', query: {ID: posts.postId}  }}>Read more</Link>
               </button>
             </div>
           </div>
+
         </div>
-      </div>
-    </div>
+    //       {/* <a href={posts.author} target="_blank">Post Author</a> */}
+    //       <div className='card-intro'>Coming from
+    //       <span className='text-weight-500 grey-tab pr-5'>{posts.author}</span>
+    //       </div>
+    //       <div>Post Id:  {posts.postId}</div>
+    //       <div className='postHeader'>{posts.title}</div>
+    //       <div className='description'>{posts.text}</div>
+    //       <img src={`https://${posts.imageUrl}.ipfs.dweb.link/${posts.imageName}`} alt="txt" />
+    //       <Player
+    //           playbackId={posts.playbackId}
+    //       />
+    //       </div>
+              
+            ))
+     }
+ 
+  
+    </>
   )
 }
 

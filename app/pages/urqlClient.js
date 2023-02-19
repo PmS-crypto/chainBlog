@@ -7,7 +7,7 @@ const APIURL = "https://api.studio.thegraph.com/query/42411/blogging-dapp/v0.0.5
 
 const query = `
 query {
-  postAddeds(first: 5) {
+  postAddeds(where: {postId: 3}) {
     id
     postId
     author

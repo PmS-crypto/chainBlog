@@ -23,14 +23,14 @@ export default function uploadAsset(){
         : null
     );
 
-    const handleUpload = async() => {
-        console.log(name,video);
-        uploadAsset();
-    };
+    // const handleUpload = async() => {
+    //     console.log(name,video);
+    //     uploadAsset();
+    // };
 
     return (
         <div>
-            <input type={"text"} placeholder={"Enter video name"} 
+            {/* <input type={"text"} placeholder={"Enter video name"} 
                 onChange={(e) => {
                     setName(e.target.value);
                 }}
@@ -42,7 +42,7 @@ export default function uploadAsset(){
                     setVideo(file);
                 }}
             />
-            <button style={{padding:10,}} onClick={handleUpload}>Upload Video</button>
+            <button style={{padding:10,}} onClick={handleUpload}>Upload Video</button> */}
         </div>
       )
 }

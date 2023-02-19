@@ -48,7 +48,7 @@ export default function Upload(){
             </form>
             <img src={url} alt="txt" />
             <button className='modal-submit link-text'>
-                <Link href="/postDetail">Back</Link>
+                {/* <Link href="/postDetail">Back</Link> */}
             </button>
         </div>
         

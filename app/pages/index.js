@@ -8,7 +8,7 @@ import Navbar from '../components/Navbar'
 import Survey from '../components/Survey'
 import SideBar from '../components/Sidebar'
 import { Listing } from '../data/Listing.seed'
-import { Posts } from '../data/Post.seed'
+// import { Posts } from '../data/Post.seed'
 import ConnectContainer from '../components/ConnectContainer'
 import { SurveySeed } from '../data/Survey.seed'
 import Modal from 'react-modal'
@@ -123,9 +123,9 @@ const Home = () => {
                   </nav>
                 </aside>
                 <main className='main-content'>
-                  {Posts.map((item, index) => {
-                    return <Post {...item} key={index} />
-                  })}
+                  {/* {Post.map((item, index) => { */}
+                     <Post />
+                  
                 </main>
                 <aside className='main-aside'>
                   <Survey
