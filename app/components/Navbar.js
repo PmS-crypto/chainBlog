@@ -4,7 +4,7 @@ const Navbar = () => (
   <header className='header-tab'>
     <div className='header-container'>
     <div className='left'>
-      <div className='logo'>DEV</div>
+      <div className='logo'>ChainBlog</div>
       <header className='search '>
         <div className='search-wrap'>
           <div className='search-icon-wrap'></div>

@@ -92,13 +92,13 @@ const Home = () => {
                       layout='fill'
                     />
                   </div>
-                  <h1 className='text-weight-semibold tab'>Relevant</h1>
+                  {/* <h1 className='text-weight-semibold tab'>Relevant</h1>
                   <span className='text-tab text-weight-medium pr-20  grey-tab tab'>
                     Latest
                   </span>
                   <span className='text-tab text-weight-medium pr-20 grey-tab tab'>
                     Top
-                  </span>
+                  </span> */}
                   <div className='flex-1' />
                   <span className='text-tab text-weight-medium pr-20 grey-tab tab'>
                     <Link href='/?post=1'>
