@@ -78,7 +78,7 @@ const CreatePost = () => {
     console.log(filename)
 
     console.log('before call')
-    await createBlog(getcid, filename, title, blogContent)
+    await createBlog(getcid, filename, name, video, title, blogContent, [tag])
     console.log('after call')
   }
 

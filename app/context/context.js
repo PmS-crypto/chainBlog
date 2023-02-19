@@ -96,12 +96,28 @@ export const AppProvider = ({ children }) => {
     setPosts(fetchedPosts)
   }
 
-  const createBlog = async (_imageUrl, _imageName, _title, _text) => {
+  const createBlog = async (
+    _imageUrl,
+    _imageName,
+    _assetId,
+    _playbackId,
+    _title,
+    _text,
+    _tags
+  ) => {
     if (!currentWalletAddress) return
 
     try {
       await blogInstance(web3Instance)
-        .methods.post(_imageUrl, _imageName, '', '', _title, _text, ['t1'])
+        .methods.post(
+          _imageUrl,
+          _imageName,
+          _assetId,
+          _playbackId,
+          _title,
+          _text,
+          _tags
+        )
         .send({
           from: currentWalletAddress,
           value: Web3.utils.toWei('0.0001', 'ether'),
