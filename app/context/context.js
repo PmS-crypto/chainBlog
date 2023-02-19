@@ -96,17 +96,16 @@ export const AppProvider = ({ children }) => {
     setPosts(fetchedPosts)
   }
 
-  const createBlog = async (title, hash, text) => {
+  const createBlog = async (_imageUrl, _imageName, _title, _text) => {
     if (!currentWalletAddress) return
 
     try {
-      await contractInstance.methods
-        .createBlogPost(title, hash, Date.now().toString(), text)
+      await blogInstance(web3Instance)
+        .methods.post(_imageUrl, _imageName, '', '', _title, _text, ['t1'])
         .send({
           from: currentWalletAddress,
+          value: Web3.utils.toWei('0.0001', 'ether'),
         })
-
-      getUploadedPostAddresses()
     } catch (error) {
       console.error(error)
     }
