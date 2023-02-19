@@ -5,19 +5,20 @@ import { FaRegComment } from 'react-icons/fa'
 import { useAppContext } from '../context/context'
 import { Posts } from '../data/Post.seed'
 import Link from 'next/link'
+import App  from '../pages/urqlClient'
 // import { Link } from 'react-router-dom';
 
 const Post = ({
-  postId,
-  author,
-  text,
-  tags,
-  value,
-  imageUrl,
-  imageName,
-  assetId,
-  playbackId,
-  title,
+  // postId,
+  // author,
+  // text,
+  // tags,
+  // value,
+  // imageUrl,
+  // imageName,
+  // assetId,
+  // playbackId,
+  // title,
 }) => {
   // const { likePost, currentWalletAddress } = useAppContext()
   // const [liked, setLiked] = useState(likers.includes(currentWalletAddress))
@@ -38,14 +39,14 @@ const Post = ({
       <div className='avatar-wrap relative'>
         <Image
           className='avatar--small'
-          src={`https://avatars.dicebear.com/api/identicon/${author}.svg`}
+          // src={`https://avatars.dicebear.com/api/identicon/${author}.svg`}
           alt='Avatar'
           layout='fill'
         />
       </div>
       <div className='card-body'>
         <div className='card-intro'>
-          <span className='text-weight-500 grey-tab pr-5'>{author}</span>
+          {/* <span className='text-weight-500 grey-tab pr-5'>{author}</span> */}
         </div>
         <div className='card-intro mt-2 '>
           <span className='text-weight-medium grey-tab pr-5 text-9'>
@@ -54,12 +55,12 @@ const Post = ({
         </div>
 
         <div className='card-content mt-15'>
-          <div className='postHeader'>{title}</div>
+          <div className='postHeader'>title</div>
           <div className='description'>test description</div>
         </div>
         <div className='tags mt-9'>
           <div className='ml-5 inline popular-tag'>
-            #<span className='hash-tag'>{tag}</span>
+            #<span className='hash-tag'>{/*tag*/}</span>
           </div>
         </div>
         <div className='card-footer'>

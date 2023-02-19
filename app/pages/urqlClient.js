@@ -1,4 +1,4 @@
-
+import { Player } from '@livepeer/react';
 import { createClient } from 'urql';
 import { useEffect,useState } from 'react';
 
@@ -36,12 +36,28 @@ function App() {
     console.log('response : ',response)
     //setaddedVoters(response.data.addedVoters)
     setpostAddeds(response.data.postAddeds)
+    console.log("our array:", response.data.postAddeds[0]["author"])
   }
   return (
     <div className="App">
       <h1>
-        trials
+        trial
       </h1>
+      {  
+        postAddeds.map((posts, index)=>(
+          <div key={index}>
+            {/* <a href={posts.author} target="_blank">Post Author</a> */}
+            {posts.author}
+            {posts.postId}
+            {/* <a href={posts.postId} target="_blank">Post ID</a> */}
+            {/* <a href={`https://${posts.imageUrl}.ipfs.dweb.link/${posts.imageName}`} target="_blank">Image</a> */}
+            <img src={`https://${posts.imageUrl}.ipfs.dweb.link/${posts.imageName}`} alt="txt" />
+            <Player
+                playbackId={posts.playbackId}
+            />
+          </div>
+        ))
+       }
       {/* {
         addedVoters.map((voter, index)=>(
           <div key={index}>
