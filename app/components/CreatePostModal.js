@@ -4,8 +4,33 @@ import { useAppContext } from '../context/context'
 import { Web3Storage } from 'web3.storage'
 import Link from 'next/link'
 import { useCreateAsset } from "@livepeer/react";
+
 // import { uploadAsset } from '../pages/uploadVideos';
 
+// let ethereum = null
+
+// if (typeof window !== 'undefined') {
+//   ethereum = window.ethereum
+// }
+
+// const createWeb3Client = (async () => {
+//       const web3 = new Web3(window.ethereum)
+//       setWeb3Instance(web3)
+
+//       const accounts = await web3.eth.getAccounts()
+//       console.log(accounts)
+//       setCurrentWalletAddress(accounts[0])
+
+//       const contract = await blogInstance(web3)
+//       setContractInstance(contract)
+
+//       // getUploadedPostAddresses(contract);
+// })
+
+// createWeb3Client();
+// const addresses = await contract.methods.postData(imageUrl: _imageUrl, imageName: _imageName, title: _title,
+// text: _text)
+    
 const CreatePost = () => {
   const [title, setTitle] = useState('')
   const [tag, setTag] = useState('')
@@ -19,8 +44,11 @@ const CreatePost = () => {
   const[token,setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDU1NzIyNzNFMkUyOTJDMzVGMGVCRDgyQjhDZEM1MTE5N0M3ODQ0ODUiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NzYwMTc1NDMxNjQsIm5hbWUiOiJmaXJzdCJ9.rdkBSEp2vZs3W_9mj7eZaDJqjizOwbq3nlsGr-_sUXM')
   const router = useRouter()
   const [name, setName] = useState("");
-  const [video, setVideo] =  useState("");
+  const [video, setVideo] = useState("");
+  const { createBlog } = useAppContext()
+
   const handlesubmit = async (e) => {
+
     if (!tag || !title || !blogContent) {
       setError('Please fill in both fields')
       return
@@ -34,12 +62,11 @@ const CreatePost = () => {
     setGenertedurl(generatedurl)
     const fetchimgUrl = `https://${getcid}.ipfs.dweb.link/${filename}`
     setURL(fetchimgUrl)
-
     
   //   useCreateAsset(
   //     video? {
   //         sources : [{
-  //             name,
+  //             name
   //             file : video
   //         }]
   //     }
@@ -49,6 +76,10 @@ const CreatePost = () => {
     // console.log(name, video);
     console.log(generatedurl);
     console.log(filename);
+
+    console.log("before call")
+    await createBlog(generatedurl, filename, title, blogContent);
+    console.log("after call")
 }
 
   

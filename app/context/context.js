@@ -96,17 +96,12 @@ export const AppProvider = ({ children }) => {
     setPosts(fetchedPosts)
   }
 
-  const createBlog = async (title, hash, text) => {
+  const createBlog = async (_imageUrl, _imageName, _title, _text) => {
     if (!currentWalletAddress) return
 
     try {
-      await contractInstance.methods
-        .createBlogPost(title, hash, Date.now().toString(), text)
-        .send({
-          from: currentWalletAddress,
-        })
-
-      getUploadedPostAddresses()
+      await contract.methods.postData(_imageUrl, _imageName, '', '', _title,_text)
+      
     } catch (error) {
       console.error(error)
     }
@@ -129,7 +124,7 @@ export const AppProvider = ({ children }) => {
   return (
     <appContext.Provider
       value={{
-        greet,
+        createBlog,
         posts,
         currentWalletAddress,
       }}
