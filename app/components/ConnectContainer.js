@@ -33,13 +33,12 @@ const ConnectContainer = () => {
               if (!connected) {
                 return (
                   <article className='survey mb-10'>
-                    <div className='survey-blue'>DEV Community 👩‍💻👨‍💻</div>
+                    <div className='survey-blue'>ChainBlog</div>
                     <div className='survey-highlight'>
-                      is a community of 903,276 amazing developers
+                      is a decentralized blogging platform for sharing thoughts freely with the world!
                     </div>
                     <div className='survey-grey'>
-                      We're a place where coders share, stay up-to-date and grow
-                      their careers.
+                      We're a place where people get to voice out their opinions without the fear of centralized authority.
                     </div>
                     <button
                       onClick={openConnectModal}

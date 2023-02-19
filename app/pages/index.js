@@ -2,15 +2,10 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Head from 'next/head'
 import Image from 'next/image'
-import ListItem from '../components/ListItem'
 import Post from '../components/Post'
 import Navbar from '../components/Navbar'
-import Survey from '../components/Survey'
-import SideBar from '../components/Sidebar'
-import { Listing } from '../data/Listing.seed'
 // import { Posts } from '../data/Post.seed'
 import ConnectContainer from '../components/ConnectContainer'
-import { SurveySeed } from '../data/Survey.seed'
 import Modal from 'react-modal'
 import '@rainbow-me/rainbowkit/styles.css'
 import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
@@ -115,10 +110,9 @@ const Home = () => {
                   <nav className='main-nav-extended'>
                     <div className='main-nav-section'>
                       <ConnectContainer />
-                      <SideBar />
-                      {SurveySeed.map((item) => {
+                      {/* {SurveySeed.map((item) => {
                         return <Survey key={item.src} {...item} />
-                      })}
+                      })} */}
                     </div>
                   </nav>
                 </aside>
@@ -127,7 +121,7 @@ const Home = () => {
                      <Post />
                   
                 </main>
-                <aside className='main-aside'>
+                {/* <aside className='main-aside'>
                   <Survey
                     src={
                       'https://res.cloudinary.com/practicaldev/image/fetch/s--ff2NVgR1--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_350/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ekb1fyzsp9jx2uxdnrqt.png'
@@ -150,7 +144,7 @@ const Home = () => {
                       </article>
                     )
                   })}
-                </aside>
+                </aside> */}
               </div>
             </div>
             <Modal

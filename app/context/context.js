@@ -100,8 +100,12 @@ export const AppProvider = ({ children }) => {
     if (!currentWalletAddress) return
 
     try {
-      await contract.methods.postData(_imageUrl, _imageName, '', '', _title,_text)
-      
+      await blogInstance(web3Instance)
+        .methods.post(_imageUrl, _imageName, '', '', _title, _text, ['t1'])
+        .send({
+          from: currentWalletAddress,
+          value: Web3.utils.toWei('0.0001', 'ether'),
+        })
     } catch (error) {
       console.error(error)
     }
@@ -124,7 +128,7 @@ export const AppProvider = ({ children }) => {
   return (
     <appContext.Provider
       value={{
-        createBlog,
+        greet,
         posts,
         currentWalletAddress,
       }}

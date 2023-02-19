@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useAppContext } from '../context/context'
 import { Web3Storage } from 'web3.storage'
 import Link from 'next/link'
-import { useCreateAsset } from "@livepeer/react";
+import { useCreateAsset } from '@livepeer/react'
 
 // import { uploadAsset } from '../pages/uploadVideos';
 
@@ -30,59 +30,57 @@ import { useCreateAsset } from "@livepeer/react";
 // createWeb3Client();
 // const addresses = await contract.methods.postData(imageUrl: _imageUrl, imageName: _imageName, title: _title,
 // text: _text)
-    
+
 const CreatePost = () => {
   const [title, setTitle] = useState('')
   const [tag, setTag] = useState('')
   const [blogContent, setBlogContent] = useState('')
   const [error, setError] = useState('')
-  const[files,setFile] = useState([])
-  const [filename,setfilename] = useState('')
-  const [url,setURL] = useState('')
-  const [generatedurl,setGenertedurl] = useState('')
-  const [cid,setCid] = useState('')
-  const[token,setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDU1NzIyNzNFMkUyOTJDMzVGMGVCRDgyQjhDZEM1MTE5N0M3ODQ0ODUiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NzYwMTc1NDMxNjQsIm5hbWUiOiJmaXJzdCJ9.rdkBSEp2vZs3W_9mj7eZaDJqjizOwbq3nlsGr-_sUXM')
+  const [files, setFile] = useState([])
+  const [filename, setfilename] = useState('')
+  const [url, setURL] = useState('')
+  const [generatedurl, setGenertedurl] = useState('')
+  const [cid, setCid] = useState('')
+  const [token, setToken] = useState(
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDU1NzIyNzNFMkUyOTJDMzVGMGVCRDgyQjhDZEM1MTE5N0M3ODQ0ODUiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NzYwMTc1NDMxNjQsIm5hbWUiOiJmaXJzdCJ9.rdkBSEp2vZs3W_9mj7eZaDJqjizOwbq3nlsGr-_sUXM'
+  )
   const router = useRouter()
-  const [name, setName] = useState("");
-  const [video, setVideo] = useState("");
+  const [name, setName] = useState('')
+  const [video, setVideo] = useState('')
   const { createBlog } = useAppContext()
 
   const handlesubmit = async (e) => {
-
     if (!tag || !title || !blogContent) {
       setError('Please fill in both fields')
       return
     }
     e.preventDefault()
-    const client = new Web3Storage({token})
-    const getcid = await client.put(files,{
-    })
+    const client = new Web3Storage({ token })
+    const getcid = await client.put(files, {})
     setCid(getcid)
     const generatedurl = `https://dweb.link/ipfs/${getcid}`
-    setGenertedurl(generatedurl)
+    setGenertedurl(getcid)
     const fetchimgUrl = `https://${getcid}.ipfs.dweb.link/${filename}`
     setURL(fetchimgUrl)
-    
-  //   useCreateAsset(
-  //     video? {
-  //         sources : [{
-  //             name
-  //             file : video
-  //         }]
-  //     }
-  //     : null
-  // );
-    console.log("testing");
+
+    //   useCreateAsset(
+    //     video? {
+    //         sources : [{
+    //             name
+    //             file : video
+    //         }]
+    //     }
+    //     : null
+    // );
+    console.log('testing')
     // console.log(name, video);
-    console.log(generatedurl);
-    console.log(filename);
+    console.log(fetchimgUrl)
+    console.log(filename)
 
-    console.log("before call")
-    await createBlog(generatedurl, filename, title, blogContent);
-    console.log("after call")
-}
-
-  
+    console.log('before call')
+    await createBlog(getcid, filename, title, blogContent)
+    console.log('after call')
+  }
 
   // const handleUpload = async() => {
   //   console.log(name,video);
@@ -116,7 +114,7 @@ const CreatePost = () => {
           type='text'
           className='modal-input'
           value={title}
-          onChange={event => {
+          onChange={(event) => {
             setTitle(event.target.value)
             setError('')
           }}
@@ -128,7 +126,7 @@ const CreatePost = () => {
           type='text'
           className='modal-input'
           value={tag}
-          onChange={event => {
+          onChange={(event) => {
             setTag(event.target.value)
             setError('')
           }}
@@ -142,27 +140,27 @@ const CreatePost = () => {
           cols='40'
           className='modal-input'
           value={blogContent}
-          onChange={event => {
+          onChange={(event) => {
             setBlogContent(event.target.value)
             setError('')
           }}
         />
-        
-       Select Image
-        <input type='file' id='filepicker' name='fileList' onChange={e => 
-                        {
-                            setFile(e.target.files)
-                            setfilename(e.target.files[0].name)
-                            
-                        }
-                        } multiple required />
-      
-        
+        Select Image
+        <input
+          type='file'
+          id='filepicker'
+          name='fileList'
+          onChange={(e) => {
+            setFile(e.target.files)
+            setfilename(e.target.files[0].name)
+          }}
+          multiple
+          required
+        />
         {/* <button className='modal-submit link-text'>
           <Link href="/uploadVideos">Upload Video</Link>
         </button> */}
-       
-         {/* Select Video
+        {/* Select Video
           <input
                   id="image" type={"file"} accept={"video/*"} style={{marginLeft:10,}}
                   onChange={(e)=>{
@@ -171,7 +169,6 @@ const CreatePost = () => {
                   }}
               />
          */}
-        
         <button className='modal-submit' onClick={handlesubmit}>
           Submit
         </button>
