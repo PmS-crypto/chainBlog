@@ -14,9 +14,9 @@ This is a Dev.to-like Blog application built with Next.js and Solidity.
 ---
 ### Commands to run the dapp
 
-cd solidity-blog
-cd app
-yarn dev or npm start dev
+- cd solidity-blog
+- cd app
+- yarn dev or npm start dev
 
 ---
 reference - (https://www.youtube.com/cleverprogrammer) 
