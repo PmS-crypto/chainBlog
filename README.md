@@ -9,7 +9,6 @@ This is a Dev.to-like Blog application built with Next.js and Solidity.
 - MetaMask Login using Rainbow Kit
 - Web3.js
 - Solidity (v0.8.16)
-- Infura, as RPC Provider
 
 ---
 ### Commands to run the dapp
